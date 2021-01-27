@@ -1,33 +1,29 @@
-import React from 'react';
+import {setState} from 'react';
 import  '../App.css';
 
 
-class Card extends React.Component {
-  constructor(props){
-    super(props);
-    console.log(props);
-    this.state={
-      faceUp:false ,
-    };
+
+const Card = (props)=>{
+  
+  const [faceUp,setFaceUp]=setState(false);
+
+  const flip=()=>{
+    setFaceUp(!faceUp)
   }
 
-  flip(){
-    this.setState({faceUp:!this.state.faceUp})
-  }
-
-  render() {
+  
     let content;
-    if(this.props.faceUp) {
-      content = this.props.content;
+    if(faceUp) {
+       content = props.content;
     } else {
-      content = 'Back'
+       content = 'Back'
     }
     return (
-      <div onClick={this.flip} className={`Card ${this.props.faceUp ? 'face-up': ''}`}>
+      <div onClick={flip} className={`Card ${faceUp ? 'face-up': ''}`}>
         {content}
       </div>
     )
-  }
+  
 }
 
 export default Card;
